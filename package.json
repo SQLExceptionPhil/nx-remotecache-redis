@@ -17,6 +17,19 @@
     "nx-remotecache-custom": "^1.1.0",
     "redis": "^4.0.4"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SQLExceptionPhil/nx-remotecache-redis.git"
+  },
+  "homepage": "https://github.com/SQLExceptionPhil/nx-remotecache-redis#readme",
+  "keywords": [
+    "nx",
+    "nx-remotecache",
+    "redis"
+  ],
+  "bugs": {
+    "url": "https://github.com/SQLExceptionPhil/nx-remotecache-redis/issues"
+  },
   "devDependencies": {
     "@nrwl/workspace": "^11.1.1",
     "@types/redis": "^4.0.11",
