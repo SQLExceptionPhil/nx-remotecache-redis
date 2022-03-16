@@ -2,7 +2,7 @@
 
 This is a task runner for @nrwl/nx https://nx.dev/react which uses a redis database as a remote caching storage. Read more about the benefits in the nx documentations [https://nx.dev/using-nx/caching#computation-caching]
 
-This package was built with [nx-remotecache-custom](https://www.npmjs.com/package/nx-remotecache-minio) 🔥
+This package was built with [nx-remotecache-custom](https://www.npmjs.com/package/nx-remotecache-custom) 🔥
 
 ## Setup
 
