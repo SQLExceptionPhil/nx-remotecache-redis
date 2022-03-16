@@ -7,29 +7,15 @@ import {
 import { commandOptions, createClient } from "redis";
 
 interface RedisRunnerOptions {
-  user: string;
-  password: string;
-  port: number;
-  host: string;
-  database?: number;
+  url?: string;
 }
 
-const ENV_REDIS_USER = "NX_CACHE_REDIS_USER";
-const ENV_REDIS_PASSWORD = "NX_CACHE_REDIS_PASSWORD";
-const ENV_REDIS_PORT = "NX_CACHE_REDIS_PORT";
-const ENV_REDIS_HOST = "NX_CACHE_REDIS_HOST";
-const ENV_REDIS_DATABASE = "NX_CACHE_REDIS_DATABASE";
+const ENV_REDIS_URL = "NX_CACHE_REDIS_URL";
 
 const getRedisClient = async (options: CustomRunnerOptions<RedisRunnerOptions>) => {
-  const redisDatabase = process.env[ENV_REDIS_DATABASE] || options.database;
-  const redisUser = process.env[ENV_REDIS_USER] || options.user;
-  const redisPassword = process.env[ENV_REDIS_PASSWORD] || options.password;
-  const redisPort = process.env[ENV_REDIS_PORT] || options.port;
-  const redisHost = process.env[ENV_REDIS_HOST] || options.host;
+  const redisUrl = process.env[ENV_REDIS_URL] || options.url;
   const redisClient = createClient({
-    url: `redis://${redisUser}:${redisPassword}@${redisHost}:${redisPort}/${
-      redisDatabase ? redisDatabase : ""
-    }`,
+    url: redisUrl,
   });
   redisClient.connect();
   return redisClient;
