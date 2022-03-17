@@ -10,9 +10,10 @@ This package was built with [nx-remotecache-custom](https://www.npmjs.com/packag
 npm install -D nx-remotecache-redis
 ```
 
-| Parameter | Description                                                                         | Environment Variable | nx.json |
-| --------- | ----------------------------------------------------------------------------------- | -------------------- | ------- |
-| Redis URL | The url to connect to redis for example: `redis://<user>:<password>@127.0.0.1:6379` | `NX_CACHE_REDIS_URL` | `url`   |
+| Parameter    | Description                                                                         | Environment Variable    | nx.json  |
+| ------------ | ----------------------------------------------------------------------------------- | ----------------------- | -------- |
+| Redis URL    | The url to connect to redis for example: `redis://<user>:<password>@127.0.0.1:6379` | `NX_CACHE_REDIS_URL`    | `url`    |
+| Redis Expire | Expire time in seconds to automaticaly delete keys                                  | `NX_CACHE_REDIS_EXPIRE` | `expire` |
 
 ```json
 {

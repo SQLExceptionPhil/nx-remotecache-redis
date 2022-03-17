@@ -8,9 +8,11 @@ import { commandOptions, createClient } from "redis";
 
 interface RedisRunnerOptions {
   url?: string;
+  expire?: number;
 }
 
 const ENV_REDIS_URL = "NX_CACHE_REDIS_URL";
+const ENV_REDIS_EXPIRE = "NX_CACHE_REDIS_EXPIRE";
 
 const getRedisClient = async (options: CustomRunnerOptions<RedisRunnerOptions>) => {
   const redisUrl = process.env[ENV_REDIS_URL] || options.url;
@@ -42,6 +44,10 @@ export default createCustomRunner<RedisRunnerOptions>(
       },
       storeFile: async (key: string, data: Buffer): Promise<void> => {
         await client.set(key, data);
+        const expire = process.env[ENV_REDIS_EXPIRE] || options.expire;
+        if (expire && !!parseInt(String(expire))) {
+          await client.expire(key, Number(expire));
+        }
       },
     };
   }
