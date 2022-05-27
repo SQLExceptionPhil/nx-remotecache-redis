@@ -1,6 +1,6 @@
 {
   "name": "nx-remotecache-redis",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Remote caching for @nrwl/nx using Redis",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^5.0.1",
-    "nx-remotecache-custom": "^1.1.0",
+    "nx-remotecache-custom": "^2.0.0",
     "redis": "^4.0.4"
   },
   "repository": {
