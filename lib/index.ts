@@ -5,6 +5,7 @@ import {
   RemoteCacheImplementation,
 } from "nx-remotecache-custom";
 import { commandOptions, createClient } from "redis";
+import { Readable } from "stream";
 
 interface RedisRunnerOptions {
   url?: string;
@@ -32,22 +33,24 @@ export default createCustomRunner<RedisRunnerOptions>(
       fileExists: async (key: string): Promise<boolean> => {
         return !!client.exists(key);
       },
-      retrieveFile: async (key: string): Promise<Buffer> => {
-        return new Promise<Buffer>(async (resolve, reject) => {
+      retrieveFile: async (key: string): Promise<NodeJS.ReadableStream> => {
+        return new Promise<NodeJS.ReadableStream>(async (resolve, reject) => {
           const data = await client.get(commandOptions({ returnBuffers: true }), key);
           if (data) {
-            resolve(data as Buffer);
+            resolve(Readable.from(data as Buffer));
           } else {
             reject();
           }
         });
       },
-      storeFile: async (key: string, data: Buffer): Promise<void> => {
-        await client.set(key, data);
-        const expire = process.env[ENV_REDIS_EXPIRE] || options.expire;
-        if (expire && !!parseInt(String(expire))) {
-          await client.expire(key, Number(expire));
-        }
+      storeFile: async (key: string, data: Readable): Promise<void> => {
+        data.on("data", async (d) => {
+          await client.set(key, d);
+          const expire = process.env[ENV_REDIS_EXPIRE] || options.expire;
+          if (expire && !!parseInt(String(expire))) {
+            await client.expire(key, Number(expire));
+          }
+        });
       },
     };
   }
