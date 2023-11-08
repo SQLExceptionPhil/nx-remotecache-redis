@@ -44,8 +44,13 @@ export default createCustomRunner<RedisRunnerOptions>(
         });
       },
       storeFile: async (key: string, data: Readable): Promise<void> => {
-        data.on("data", async (d) => {
-          await client.set(key, d);
+        const bufs: any[] = [];
+        data.on("data", (d) => {
+          bufs.push(d);
+        });
+        data.on("end", async () => {
+          const buf = Buffer.concat(bufs);
+          await client.set(key, buf);
           const expire = process.env[ENV_REDIS_EXPIRE] || options.expire;
           if (expire && !!parseInt(String(expire))) {
             await client.expire(key, Number(expire));
