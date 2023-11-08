@@ -15,8 +15,7 @@
   "dependencies": {
     "chalk": "^5.0.1",
     "nx-remotecache-custom": "^5.0.1",
-    "redis": "^4.0.4",
-    "redis-rstream": "^1.0.1"
+    "redis": "^4.0.4"
   },
   "repository": {
     "type": "git",
