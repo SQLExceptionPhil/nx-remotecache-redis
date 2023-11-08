@@ -31,7 +31,7 @@ export default createCustomRunner<RedisRunnerOptions>(
     return {
       name: "Redis",
       fileExists: async (key: string): Promise<boolean> => {
-        return !!client.exists(key);
+        return !!(await client.exists(key));
       },
       retrieveFile: async (key: string): Promise<NodeJS.ReadableStream> => {
         return new Promise<NodeJS.ReadableStream>(async (resolve, reject) => {
