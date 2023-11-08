@@ -4,8 +4,9 @@ import {
   initEnv,
   RemoteCacheImplementation,
 } from "nx-remotecache-custom";
-import { commandOptions, createClient } from "redis";
+import { createClient } from "redis";
 import { Readable } from "stream";
+import * as redisRStream from "redis-rstream";
 
 interface RedisRunnerOptions {
   url?: string;
@@ -34,14 +35,7 @@ export default createCustomRunner<RedisRunnerOptions>(
         return !!client.exists(key);
       },
       retrieveFile: async (key: string): Promise<NodeJS.ReadableStream> => {
-        return new Promise<NodeJS.ReadableStream>(async (resolve, reject) => {
-          const data = await client.get(commandOptions({ returnBuffers: true }), key);
-          if (data) {
-            resolve(Readable.from(data as Buffer));
-          } else {
-            reject();
-          }
-        });
+        return redisRStream(client, key);
       },
       storeFile: async (key: string, data: Readable): Promise<void> => {
         data.on("data", async (d) => {

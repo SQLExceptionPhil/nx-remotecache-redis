@@ -14,8 +14,9 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^5.0.1",
-    "nx-remotecache-custom": "^2.0.0",
-    "redis": "^4.0.4"
+    "nx-remotecache-custom": "^5.0.1",
+    "redis": "^4.0.4",
+    "redis-rstream": "^1.0.1"
   },
   "repository": {
     "type": "git",
@@ -31,8 +32,12 @@
     "url": "https://github.com/SQLExceptionPhil/nx-remotecache-redis/issues"
   },
   "devDependencies": {
-    "@nrwl/workspace": "^11.1.1",
+    "@nrwl/workspace": "^16.9.0",
+    "@types/node": "^20.9.0",
     "@types/redis": "^4.0.11",
-    "typescript": "^4.6.2"
+    "typescript": "^5.1.0"
+  },
+  "peerDependencies": {
+    "@nx/workspace": ">=16.9.0"
   }
 }
