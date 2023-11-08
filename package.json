@@ -1,6 +1,6 @@
 {
   "name": "nx-remotecache-redis",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Remote caching for @nrwl/nx using Redis",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -32,11 +32,10 @@
   },
   "devDependencies": {
     "@nrwl/workspace": "^16.9.0",
+    "@nx/workspace": ">=16.9.0",
     "@types/node": "^20.9.0",
     "@types/redis": "^4.0.11",
+    "@types/yargs": "^17.0.31",
     "typescript": "^5.1.0"
-  },
-  "peerDependencies": {
-    "@nx/workspace": ">=16.9.0"
   }
 }
